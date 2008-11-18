@@ -3,7 +3,7 @@
 Plugin Name: Keyboard Navigation
 Plugin URI: http://www.coswellproductions.com/wordpress/keyboard-navigation/
 Description: Attach keyboard navigation to blog entries.
-Version: 0.1
+Version: 0.2
 Author: John Bintz
 Author URI: http://www.coswellproductions.org/wordpress/
 
@@ -115,7 +115,7 @@ class KeyboardNavigation {
         </form>
 
         <div id="top-information">
-          <p><strong>Keyboard Navigation</strong> Version 0.1</p>
+          <p><strong>Keyboard Navigation</strong> Version 0.2</p>
 
           <p>Copyright &copy; 2008 <a href="mailto:john@claritycomic.com?Subject=Keyboard+Navigation+Comments">John Bintz</a> |
              Released under the GNU GPL</p>
@@ -205,7 +205,8 @@ class KeyboardNavigation {
       </div>
 
       <p><strong>Keyboard Navigation</strong> requires that the visitor have JavaScript enabled. This plugin uses
-      the Prototype JavaScript library, and including it will increase the size of your total site download.</p>
+      the Prototype JavaScript library, and including it will increase the size of your total site download. Additionally,
+      if other plugins <strong>load their own copies of the Prototype library</strong>, both plugins <strong>will break</strong>.</p>
     </div>
   <?php }
 }

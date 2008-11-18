@@ -15,7 +15,7 @@ KeyboardNavigation.get_hrefs = function(fields, admin_mode) {
         while (top_node) {
           if (top_node.href) {
             found_properties[key] = top_node.href; is_found = true;
-            if (admin_mode) {
+            if (highlight_selectors) {
               var highlight_a = new Element("a", { "title": key + ": " + instructions, "href": top_node.href, "style": "display: block; position: absolute; border: solid #f00 1px; background-color: #ff0; z-index: 1" });
               highlight_a.setOpacity(0.5);
               highlight_a.clonePosition(top_node);
@@ -33,12 +33,14 @@ KeyboardNavigation.get_hrefs = function(fields, admin_mode) {
     }
   }
 
-  if (missing_properties.length > 0) {
-    var message = "[Keyboard Navigation] Missing selectors:\n\n" + missing_properties.join("\n");
-    if (top.console) {
-      top.console.log(message);
-    } else {
-      alert(message);
+  if (highlight_selectors) {
+    if (missing_properties.length > 0) {
+      var message = "[Keyboard Navigation] Missing selectors:\n\n" + missing_properties.join("\n");
+      if (top.console) {
+        top.console.log(message);
+      } else {
+        alert(message);
+      }
     }
   }
 
