@@ -3,7 +3,7 @@ Contributors: johncoswell
 Tags: comicpress, webcomics, posts, plugin, navigation
 Requires at least: 2.6.3
 Tested up to: 2.6.3
-Stable tag: 0.1
+Stable tag: 0.2
 
 Keyboard Navigation easily adds JavaScript-based keyboard navigation to a WordPress site.
 
