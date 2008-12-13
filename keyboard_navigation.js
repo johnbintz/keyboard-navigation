@@ -53,17 +53,19 @@ KeyboardNavigation.get_hrefs = function(fields, admin_mode) {
 
 KeyboardNavigation.add_events = function(hrefs) {
   Event.observe(document, 'keyup', function(e) {
-    var prop_to_use = null;
-    switch (e.keyCode) {
-      case 37:
-        prop_to_use = (e.shiftKey) ? "first" : "previous";
-        break;
-      case 39:
-        prop_to_use = (e.shiftKey) ? "last" : "next";
-        break;
-    }
-    if (prop_to_use) {
-      if (hrefs[prop_to_use]) { document.location.href = hrefs[prop_to_use]; }
+    if (!(e.ctrlKey || e.altKey || e.metaKey)) {
+      var prop_to_use = null;
+      switch (e.keyCode) {
+        case 37:
+          prop_to_use = (e.shiftKey) ? "first" : "previous";
+          break;
+        case 39:
+          prop_to_use = (e.shiftKey) ? "last" : "next";
+          break;
+      }
+      if (prop_to_use) {
+        if (hrefs[prop_to_use]) { document.location.href = hrefs[prop_to_use]; }
+      }
     }
   }, true);
 

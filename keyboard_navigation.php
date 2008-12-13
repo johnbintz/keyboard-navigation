@@ -3,7 +3,7 @@
 Plugin Name: Keyboard Navigation
 Plugin URI: http://www.coswellproductions.com/wordpress/keyboard-navigation/
 Description: Attach keyboard navigation to blog entries.
-Version: 0.2
+Version: 0.3
 Author: John Bintz
 Author URI: http://www.coswellproductions.org/wordpress/
 
