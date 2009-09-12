@@ -6,8 +6,6 @@ Description: Attach keyboard navigation to blog entries.
 Version: 1.0
 Author: John Bintz
 Author URI: http://www.coswellproductions.org/wordpress/
-Requires at least: 2.7
-Tested up to: 2.8.4
 
 Copyright 2008-2009 John Bintz  (email : jcoswell@coswellproductions.org)
 
