@@ -17,6 +17,7 @@
       <p><?php _e('Need some sane defaults for your theme? Click one of the links below to populate the selectors on the left:', 'keyboard-navigation') ?></p>
 
       <ul>
+        <li><a href="#" class="pre-populate comicpress_28"><?php _e('Default ComicPress 2.8 Theme', 'keyboard-navigation') ?></a></li>
         <li><a href="#" class="pre-populate comicpress_25"><?php _e('Default ComicPress 2.5 Theme', 'keyboard-navigation') ?></a></li>
       </ul>
     </div>
@@ -60,6 +61,12 @@
         next:     "div#menunav a span.next",
         first:    "",
         last:     "div#header h1 a"
+      },
+      'comicpress_28': {
+        previous: ".navi-prev",
+        next:     ".navi-next",
+        first:    ".navi-first",
+        last:     ".navi-last"
       }
     };
     

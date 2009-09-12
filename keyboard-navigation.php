@@ -6,6 +6,8 @@ Description: Attach keyboard navigation to blog entries.
 Version: 1.0
 Author: John Bintz
 Author URI: http://www.coswellproductions.org/wordpress/
+Requires at least: 2.7
+Tested up to: 2.8.4
 
 Copyright 2008-2009 John Bintz  (email : jcoswell@coswellproductions.org)
 
@@ -29,7 +31,7 @@ class KeyboardNavigation {
   function init() {
     wp_enqueue_script('prototype');
     
-    add_action('wp_footer',  array(&$this, "footer"));
+    add_action('wp_footer',  array(&$this, "wp_footer"));
     add_action('admin_menu', array(&$this, "admin_menu"));    
     add_action('admin_head', array(&$this, "admin_head"));
     
@@ -69,25 +71,32 @@ class KeyboardNavigation {
 
   function KeyboardNavigation() {}
 
-  function footer() {
-    $plugin_url_root = pathfinding_get_admin_url() . '/' . pathfinding_get_plugin_path(); ?>
-      <script type="text/javascript" src="<?php echo $plugin_url_root ?>/keyboard_navigation.js"></script>
-      <script type="text/javascript">
+  function wp_footer() {
+    $plugin_dir_url = plugin_dir_url(__FILE__);
+    $options = get_option('keyboard-navigation-options');
+    $nonce = wp_create_nonce('keyboard-navigation');
+    $options = get_option('keyboard-navigation-options');
+    if (!is_array($options)) { $options = array(); }
+    
+    ?><script type="text/javascript">
+      var s = document.createElement('script');
+      s.src = '<?php echo $plugin_dir_url . 'keyboard-navigation.js' ?>';
+      s.onload = function() {    
         var keyboard_navigation_fields = {};
         <?php foreach (array_keys($this->fields) as $field) {
-          $selector = get_option("keyboard-navigation-selector-${field}");
-          if (!empty($selector)) { ?>
-            keyboard_navigation_fields['<?php echo $field ?>'] = "<?php echo addslashes($selector) ?>";
+          if (!empty($options['selectors'][$field])) { ?>
+            keyboard_navigation_fields['<?php echo $field ?>'] = "<?php echo addslashes($options['selectors'][$field]) ?>";
           <?php }
         } ?>
 
-        var highlight_selectors = <?php echo (WP_ADMIN && (get_option("keyboard-navigation-highlight-selected-elements") == 1)) ? "true" : "false" ?>;
-
+        var highlight_selectors = <?php echo (current_user_can('edit_themes') && $options['highlight']) ? "true" : "false" ?>;
+  
         var results = KeyboardNavigation.get_hrefs(keyboard_navigation_fields, highlight_selectors);
         if (results != false) { KeyboardNavigation.add_events(results); }
-      </script>
-    <?php
-  }
+      };
+      document.getElementsByTagName('body')[0].appendChild(s);
+    </script>
+  <?php }
 
   function admin_menu() {
     add_options_page('Keyboard Navigation', __("Keyboard Navigation", 'keyboard-navigation'), 'edit_themes', 'keyboard-navigation', array($this, "link_editor"));
@@ -108,7 +117,7 @@ class KeyboardNavigation {
     if (!is_array($options)) { $options = array(); }
     
     $plugin_data = get_plugin_data(__FILE__);
-    
+
     include(dirname(__FILE__) . '/admin.inc');
   }
 }
